@@ -1,16 +1,16 @@
 import gi
 gi.require_version('Gtk', '3.0')
+
+from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import Gtk
 
-from .input import Input
 from .switcher import Switcher
-from .shortcuts import Shortcuts
+from .launcher import Launcher
 
 def main():
-    switcher = Switcher()
-    shortcuts = Shortcuts(switcher)
-    input = Input(shortcuts)
-    input.start()
+    DBusGMainLoop(set_as_default=True)
+    Switcher()
+    Launcher()
     Gtk.main()
 
 main()

@@ -4,11 +4,9 @@ from gi.repository.GLib import idle_add
 from threading import Thread
 
 class Input:
-    def __init__(self, shortcuts):
-        self.shortcuts = shortcuts
+    def __init__(self, handler):
+        self.handler = handler
         self.thread = Thread(target=self.run, args=())
-
-    def start(self):
         self.thread.start()
 
     def run(self):
@@ -18,9 +16,5 @@ class Input:
             self.process_event(event)
 
     def process_event(self, event):
-        def process_event(data):
-            key, key_state = data
-            self.shortcuts.handle(key, key_state)
-
         if event.type == EventType.KEYBOARD_KEY:
-            idle_add(process_event, (event.key, event.key_state))
+            idle_add(self.handler, event.key, event.key_state)
