@@ -1,14 +1,14 @@
 from glob import glob
 
 from xdg.DesktopEntry import DesktopEntry
-from os.path import exists, basename
+from os.path import basename
 
 class DesktopEntryStore:
     APPS_PATH_SYSTEM = "/usr/share/applications/"
 
     def __init__(self):
         all_entries = glob(f"{DesktopEntryStore.APPS_PATH_SYSTEM}/*.desktop")
-        self.entries = list(map(lambda entry_path: DesktopEntry(entry_path), all_entries))
+        self.entries = list(map(DesktopEntry, all_entries))
 
     def load_entries(self, apps):
         all_entries = list(map(self.find_entry, apps))

@@ -1,4 +1,3 @@
-
 from libinput import LibInput, ContextType, EventType, KeyState
 from gi.repository.GLib import idle_add
 from threading import Thread

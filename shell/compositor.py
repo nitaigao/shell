@@ -1,10 +1,9 @@
 import dbus
 
 class Compositor:
-
-    def run_shortcut(self, id):
-        if id in self.shortcuts:
-            self.shortcuts[id]()
+    def run_shortcut(self, shortcut_id):
+        if shortcut_id in self.shortcuts:
+            self.shortcuts[shortcut_id]()
 
     def __init__(self):
         self.shortcuts = {}
@@ -22,3 +21,12 @@ class Compositor:
 
     def focus(self, app):
         self.window.Focus(app)
+
+    def dock_left(self):
+        self.window.DockLeft()
+
+    def dock_right(self):
+        self.window.DockRight()
+
+    def maximize(self):
+        self.window.Maximize()
