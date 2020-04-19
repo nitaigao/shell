@@ -30,3 +30,6 @@ class Compositor:
 
     def maximize(self):
         self.window.Maximize()
+
+    def minimize(self):
+        self.window.Minimize()

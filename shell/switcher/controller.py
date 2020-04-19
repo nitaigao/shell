@@ -8,9 +8,9 @@ from shell import keys
 from .view import View
 
 class Controller:
-    def __init__(self):
+    def __init__(self, application):
         self.compositor = Compositor()
-        self.view = View()
+        self.view = View(application)
         self.input = Input(self.on_key)
         self.store = DesktopEntryStore()
         self.visible = False

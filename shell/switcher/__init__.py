@@ -1,5 +1,5 @@
 from .controller import Controller
 
-def Switcher():
-    controller = Controller()
+def Switcher(application):
+    controller = Controller(application)
     controller.setup_shortcuts()

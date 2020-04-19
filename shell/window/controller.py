@@ -10,3 +10,5 @@ class Controller:
                                      keys.PRESSED, compositor.dock_right)
         compositor.register_shortcut(keys.KEY_UP, keys.ALT,
                                      keys.PRESSED, compositor.maximize)
+        compositor.register_shortcut(keys.KEY_DOWN, keys.ALT,
+                                     keys.PRESSED, compositor.minimize)
