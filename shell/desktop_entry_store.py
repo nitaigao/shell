@@ -1,7 +1,23 @@
 from glob import glob
 
-from xdg.DesktopEntry import DesktopEntry
 from os.path import basename
+from xdg.DesktopEntry import DesktopEntry
+
+
+def entry_matches(entry, app):
+    if basename(entry.filename) == f"{app}.desktop":
+        return True
+
+    if (
+        entry.getStartupWMClass() is not None
+        and entry.getStartupWMClass().lower() == app.lower()
+    ):
+        return True
+
+    if entry.getName() == app:
+        return True
+    return False
+
 
 class DesktopEntryStore:
     APPS_PATH_SYSTEM = "/usr/share/applications/"
@@ -17,6 +33,6 @@ class DesktopEntryStore:
 
     def find_entry(self, app):
         for entry in self.entries:
-            if basename(entry.filename) == f"{app}.desktop" or entry.getStartupWMClass() == app:
+            if entry_matches(entry, app):
                 entry.name = app
                 return entry

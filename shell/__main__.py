@@ -21,7 +21,6 @@ class Application(Gtk.Application):
     def do_activate(self):
         settings = Gtk.Settings.get_default()
         settings.set_property("gtk-application-prefer-dark-theme", True)
-
         Switcher(self)
         Launcher()
         Window()

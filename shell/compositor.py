@@ -1,5 +1,13 @@
 import dbus
 
+
+def registry_global_handler(registry, id_, interface, version):
+    compositor = registry.user_data
+    if interface == "wl_compositor":
+        print("got compositor")
+        compositor.compositor = registry.bind(id_, WlCompositor, version)
+
+
 class Compositor:
     def run_shortcut(self, shortcut_id):
         if shortcut_id in self.shortcuts:
@@ -7,9 +15,11 @@ class Compositor:
 
     def __init__(self):
         self.shortcuts = {}
-        self.proxy = dbus.SessionBus().get_object('org.os.Compositor', '/org/os/Compositor')
-        self.shortcut = dbus.Interface(self.proxy, 'org.os.Compositor.Shortcut')
-        self.window = dbus.Interface(self.proxy, 'org.os.Compositor.Window')
+        self.proxy = dbus.SessionBus().get_object(
+            "org.os.Compositor", "/org/os/Compositor"
+        )
+        self.shortcut = dbus.Interface(self.proxy, "org.os.Compositor.Shortcut")
+        self.window = dbus.Interface(self.proxy, "org.os.Compositor.Window")
         self.shortcut.connect_to_signal("Shortcut", self.run_shortcut)
 
     def register_shortcut(self, key_code, modifiers, state, action):

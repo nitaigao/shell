@@ -20,6 +20,7 @@ class Controller:
     def setup_shortcuts(self):
         self.compositor.register_shortcut(keys.KEY_TAB, keys.ALT | keys.SHIFT, keys.PRESSED, self.backward)
         self.compositor.register_shortcut(keys.KEY_TAB, keys.ALT, keys.PRESSED, self.forward)
+        self.compositor.register_shortcut(keys.KEY_TAB, keys.LOGO, keys.PRESSED, self.forward)
 
     def on_key(self, key_code, _state):
         if key_code == keys.KEY_LEFTALT:
